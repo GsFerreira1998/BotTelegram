@@ -3,23 +3,23 @@ from telegram.ext import Application, CommandHandler, MessageHandler, filters
 import openpyxl
 import os
 
-# Função para salvar a lista de mercado em um arquivo Excel
+#salvar a lista de mercado em um arquivo Excel
 def salvar_lista(lista):
     # Criar uma planilha
     wb = openpyxl.Workbook()
     ws = wb.active
     ws.title = "Lista de Mercado"
     
-    # Adicionar os itens à planilha
+    #itens à planilha
     for index, item in enumerate(lista, start=1):
         ws[f"A{index}"] = item
     
-    # Salvar o arquivo Excel
+    #arquivo Excel
     file_path = "lista_mercado.xlsx"
     wb.save(file_path)
     return file_path
 
-# Função para processar a mensagem e criar a lista de mercado
+#criar a lista de mercado
 async def criar_lista(update: Update, context):
     # Receber a mensagem com os itens da lista separados por vírgula
     msg = update.message.text
@@ -38,10 +38,10 @@ async def criar_lista(update: Update, context):
     # Remover o arquivo após o envio para evitar acúmulo de arquivos
     os.remove(file_path)
 
-# Função para iniciar o bot
+#iniciar o bot
 def main():
     # Substitua 'YOUR_TOKEN' pelo token que você obteve do BotFather
-    application = Application.builder().token("7798303640:AAFHz7IQ_sU-pJ7-l_xNwXGC7UoEvdZHq-M").build()
+    application = Application.builder().token("********").build()
 
     # Adicionar manipuladores de comando
     application.add_handler(CommandHandler("start", lambda update, context: update.message.reply_text("Olá! Envie uma lista de mercado, separada por vírgula.")))
